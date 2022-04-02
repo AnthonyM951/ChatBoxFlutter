@@ -1,6 +1,6 @@
-# chat_box_flutter
+# projetfinal
 
-ChatBox using Flutter
+A new Flutter project.
 
 ## Getting Started
 
