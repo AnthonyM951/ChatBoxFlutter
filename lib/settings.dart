@@ -1,31 +1,70 @@
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:projetfinal/Model/Utilisateur.dart';
-import 'package:projetfinal/functions/FirestoreHelper.dart';
+import 'package:projetfinal/contact.dart';
+import 'package:projetfinal/dashboard.dart';
+import 'Model/Utilisateur.dart';
+import 'functions/FirestoreHelper.dart';
 
-class myDrawer extends StatefulWidget{
+
+class settings extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return myDrawerState();
+    return settingsState();
   }
-
 }
 
-class myDrawerState extends State<myDrawer>{
-  //Varibale
-  late Utilisateur myProfil;
-  String? nameFile;
-  String? urlFile;
-  Uint8List? bytesFile;
+ class settingsState extends State<settings> {
+
+   //Varibale
+   late Utilisateur myProfil;
+   String? nameFile;
+   String? urlFile;
+   Uint8List? bytesFile;
+
+   void navigateToDashboard() async {
+     Navigator.push(context, MaterialPageRoute(
+         builder: (context){
+           return dashboard();
+         }
+     ));
+   }
+
+   void navigateToContact() async {
+     Navigator.push(context, MaterialPageRoute(
+         builder: (context){
+           return contact();
+         }
+     ));
+   }
 
   @override
   Widget build(BuildContext context) {
 
+
     // TODO: implement build
-    //Méthode
+   return Scaffold(
+     appBar: AppBar(
+       title: Text('Settings'),
+     ),
+     body: bodyPage(),
+     persistentFooterButtons: <Widget>[
+       IconButton(icon: const Icon(Icons.wechat_outlined, size: 40,), alignment: Alignment.centerLeft, onPressed: navigateToDashboard),
+       IconButton(icon: const Icon(Icons.people, size: 40,), onPressed: navigateToContact),
+       IconButton(icon: const Icon(Icons.settings, size: 40,), onPressed: (){if (kDebugMode) {
+         print("You are already on this page");
+       }}),
+     ],
+   );
+
+
+  }
+
+  Widget bodyPage() {
+
     popImage(){
       print("afficher popUp");
       showDialog(
@@ -79,17 +118,6 @@ class myDrawerState extends State<myDrawer>{
       );
     }
 
-    //Construire mon Utilsateur
-    FirestoreHelper().getIdentifiant().then((String monId){
-      FirestoreHelper().getUtilisateur(monId).then((Utilisateur monUser){
-        setState(() {
-          myProfil = monUser;
-        });
-
-      });
-    });
-
-
     return Container(
       color: Colors.white,
       width: MediaQuery.of(context).size.width/2,
@@ -138,4 +166,5 @@ class myDrawerState extends State<myDrawer>{
     );
   }
 
-}
+  }
+

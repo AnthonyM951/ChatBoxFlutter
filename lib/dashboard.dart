@@ -1,10 +1,14 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:projetfinal/Model/Utilisateur.dart';
 import 'package:projetfinal/detail.dart';
 import 'package:projetfinal/functions/FirestoreHelper.dart';
 import 'package:projetfinal/myWidgets/myDrawer.dart';
+import 'package:projetfinal/settings.dart';
+
+import 'contact.dart';
 
 class dashboard extends StatefulWidget{
   @override
@@ -12,22 +16,47 @@ class dashboard extends StatefulWidget{
     // TODO: implement createState
     return dashboardState();
   }
-
 }
 
+
+
 class dashboardState extends State<dashboard>{
+
+  void navigateToContact() async {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context){
+          return contact();
+        }
+    ));
+  }
+
+  void navigateToSettings() async {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context){
+          return settings();
+        }
+    ));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      drawer: myDrawer(),
       appBar: AppBar(
-        title: Text("Mon application"),
+        title: Text("Conversation"),
       ),
       body: bodyPage(),
+      persistentFooterButtons: <Widget>[
+        IconButton(icon: const Icon(Icons.wechat_outlined, size: 40,), alignment: Alignment.centerLeft, onPressed: (){if (kDebugMode) {
+          print("You are already on this page");
+        }}),
+        IconButton(icon: const Icon(Icons.people, size: 40,), onPressed: navigateToContact),
+        IconButton(icon: const Icon(Icons.settings, size: 40,), onPressed: navigateToSettings,),
+      ],
+
     );
   }
-
 
   Widget bodyPage(){
     return StreamBuilder<QuerySnapshot>(
@@ -76,7 +105,6 @@ class dashboardState extends State<dashboard>{
                             )
                         ),
                       ),
-
                       title: Text("${user.prenom} ${user.nom}"),
                       trailing: IconButton(
                         icon: Icon(Icons.edit),
@@ -86,12 +114,10 @@ class dashboardState extends State<dashboard>{
                       ),
                     ),
                   );
-
                 }
             );
           }
         }
     );
   }
-
 }
