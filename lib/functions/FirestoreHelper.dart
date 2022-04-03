@@ -32,30 +32,21 @@ class FirestoreHelper {
       "MAIL": mail
     };
     addUser(uid, map);
-
   }
-
-
 
 //Pour la connexion
-
   Future Connexion(String mail, String password) async {
     UserCredential resultat = await auth.signInWithEmailAndPassword(email: mail, password: password);
-
   }
-
 
 //Ajouter des utilisateurs
   addUser(String uid,Map<String,dynamic>map){
     fire_user.doc(uid).set(map);
-
   }
-
 
 //Modifier les informations d'un utilisateur
   updatedUser(String uid,Map<String,dynamic>map){
     fire_user.doc(uid).update(map);
-
   }
 
   Future <String> getIdentifiant() async{
@@ -66,19 +57,11 @@ class FirestoreHelper {
   Future <Utilisateur> getUtilisateur(String uid) async {
     DocumentSnapshot  snapshot = await fire_user.doc(uid).get();
     return Utilisateur(snapshot);
-
   }
 
   Future <String> stockageImage(String nameFile,Uint8List datas) async{
     TaskSnapshot snapshot = await fireStorage.ref("image/$nameFile").putData(datas);
     String urlChemin = await snapshot.ref.getDownloadURL();
     return urlChemin;
-
-
   }
-
-
-
-
-
 }
