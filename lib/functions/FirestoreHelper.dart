@@ -5,13 +5,16 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:projetfinal/Model/Utilisateur.dart';
+import 'package:projetfinal/Model/message.dart';
 
 class FirestoreHelper {
   //Attributs
   final auth = FirebaseAuth.instance;
   final fire_user = FirebaseFirestore.instance.collection("Utilisateurs");
   final fireStorage = FirebaseStorage.instance;
+  final fire_msg = FirebaseFirestore.instance.collection("Message");
 
 
 
@@ -20,7 +23,15 @@ class FirestoreHelper {
 
 
   //méthode
-
+Future CreateMsg(String urlAvatar,String prenom,String message) async {
+  String mid = fire_msg.id;
+  Map<String,dynamic>map = {
+    "URLAVATAR":urlAvatar,
+    "PRENOM": prenom,
+    "MESSAGE": message
+  };
+ addMsg(mid, map);
+}
 //Pour l'inscription
   Future Inscription(String mail,String password,String nom, String prenom) async {
     UserCredential resultat = await auth.createUserWithEmailAndPassword(email: mail, password: password);
@@ -63,5 +74,9 @@ class FirestoreHelper {
     TaskSnapshot snapshot = await fireStorage.ref("image/$nameFile").putData(datas);
     String urlChemin = await snapshot.ref.getDownloadURL();
     return urlChemin;
+  }
+
+  addMsg(String mid, Map<String, dynamic> map) {
+    fire_msg.doc(mid).set(map);
   }
 }

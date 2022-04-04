@@ -37,7 +37,7 @@ class settings extends StatefulWidget {
    void navigateToContact() async {
      Navigator.push(context, MaterialPageRoute(
          builder: (context) {
-           return contact();
+           return dashboard();
          }
      ));
    }

@@ -25,9 +25,9 @@ class dashboardState extends State<dashboard>{
   void navigateToContact() async {
     Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return contact();
-        }
-    ));
+          return dashboard();
+       }
+   ));
   }
 
   void navigateToSettings() async {
@@ -39,12 +39,13 @@ class dashboardState extends State<dashboard>{
   }
 
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: Text("Conversation"),
+        title: Text("Conversations"),
       ),
       body: bodyPage(),
       persistentFooterButtons: <Widget>[
@@ -56,8 +57,17 @@ class dashboardState extends State<dashboard>{
       ],
 
     );
-  }
+    // get the text in the TextField and start the Second Screen
 
+  }
+  void _sendDataToSecondScreen(BuildContext context,String name) {
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => contact(user: name),
+        ));
+  }
   Widget bodyPage(){
     return StreamBuilder<QuerySnapshot>(
         stream: FirestoreHelper().fire_user.snapshots(),
@@ -78,11 +88,7 @@ class dashboardState extends State<dashboard>{
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     child:  ListTile(
                       onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context){
-                              return detail(user: user,);
-                            }
-                        ));
+                        _sendDataToSecondScreen(context, user.prenom);
                       },
                       leading: (user.avatar==null)?Container(
                         height: 50,
