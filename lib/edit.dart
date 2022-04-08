@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:finishedchatbox/Model/Utilisateur.dart';
 import 'Model/Utilisateur.dart';
 import 'package:finishedchatbox/settings.dart';
@@ -21,7 +21,7 @@ class edit extends StatefulWidget {
 
 class editState extends State<edit> {
   late Utilisateur myProfil;
-  final TextEditingController _email = TextEditingController();
+  final TextEditingController _mail = TextEditingController();
 
   bool isLoading = false;
   void navigateToContact() async {
@@ -32,7 +32,7 @@ class editState extends State<edit> {
     ));
   }
   Widget build(BuildContext context) {
-    getIdentifiant().then((String monId){
+    getId().then((String monId){
       getUtilisateur(monId).then((Utilisateur monUser){
         setState(() {
           myProfil = monUser;
@@ -76,7 +76,7 @@ class editState extends State<edit> {
           ),
         ),
         SizedBox(
-          height: 50,child: field(size, "email", Icons.account_box, _email),
+          height: 50,child: field(size, "email", Icons.account_box, _mail),
         ),
         //Entrer une adresse mail
         SizedBox(height: 10,),
@@ -110,16 +110,16 @@ class editState extends State<edit> {
       onTap: () {
 
         if (
-            _email.text.isNotEmpty ) {
+            _mail.text.isNotEmpty ) {
           setState(() {
             isLoading = true;
           });
 
           Map<String,dynamic> map = {
-            "email": _email.text
+            "email": _mail.text
           };
 
-           modifyMail(myProfil.id,_email.text,map).then((monUser) {
+           modifyMail(myProfil.id,_mail.text,map).then((monUser) {
             if (monUser != null) {
               setState(() {
 
@@ -130,7 +130,7 @@ class editState extends State<edit> {
               print("Changed successfully");
 
             } else {
-              deleteUser();
+
               print("Login Failed");
               setState(() {
                 isLoading = false;
@@ -167,6 +167,7 @@ class editState extends State<edit> {
       width: size.width / 1.1,
       child: TextField(
         controller: cont,
+
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
           hintText: hintText,

@@ -1,14 +1,14 @@
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:finishedchatbox/Screens/ChatRoom.dart';
-import 'package:finishedchatbox/group_chats/group_chat_screen.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:finishedchatbox/Model/Utilisateur.dart';
-import 'package:finishedchatbox/detail.dart';
 
-import '../myWidgets/myDrawer.dart';
+
+
 import '../settings.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,11 +29,11 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    setStatus("Online");
+    statusState("Online");
 
   }
 
-  void setStatus(String status) async {
+  void statusState(String status) async {
     await _firestore.collection('users').doc(_auth.currentUser!.uid).update({
       "status": status,
     });
@@ -43,10 +43,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       // online
-      setStatus("Online");
+      statusState("Online");
     } else {
       // offline
-      setStatus("Offline");
+      statusState("Offline");
     }
   }
 
@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     }
   }
 
-  void onSearch() async {
+  void research() async {
     FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
     setState(() {
@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
       print(userMap);
     });
   }
-  void navigateToSettings() async {
+  void goToSettings() async {
     Navigator.push(context, MaterialPageRoute(
         builder: (context){
           return settings();
@@ -92,9 +92,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
     return Scaffold(
       //drawer: myDrawer(),
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Text("Home Screen"),
         actions: [
-          IconButton(icon: Icon(Icons.logout), onPressed: () => logOut(context))
+          IconButton(icon: Icon(Icons.logout), onPressed: () => logout(context))
         ],
       ),
       body: Container(
@@ -138,11 +139,12 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
                   height: size.height / 50,
                 ),
                 ElevatedButton(
-                  onPressed: onSearch,
+                  onPressed: research,
                   child: Text("Chercher"),
-                  style: ButtonStyle(shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red),shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
+
                           side: BorderSide(color: Colors.red)
                       )
                   )),
@@ -189,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
 
     IconButton(icon: const Icon(Icons.settings, size: 40,), onPressed: () {
-      navigateToSettings();
+      goToSettings();
     if (kDebugMode) {
     print("You are already on this page");
     }

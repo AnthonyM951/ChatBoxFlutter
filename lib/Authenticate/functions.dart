@@ -1,11 +1,11 @@
 import 'dart:typed_data';
 
-import 'package:finishedchatbox/Authenticate/LoginScree.dart';
+import 'package:finishedchatbox/Authenticate/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:finishedchatbox/Model/Utilisateur.dart';
 
 Future<User?> createAccount(String name, String email, String password) async {
@@ -34,12 +34,12 @@ Future<User?> createAccount(String name, String email, String password) async {
     return null;
   }
 }
-Future <String> getIdentifiant() async{
+Future <String> getId() async{
   FirebaseAuth _auth = FirebaseAuth.instance;
   String uid = _auth.currentUser!.uid;
   return uid;
 }
-Future<User?> logIn(String email, String password) async {
+Future<User?> login(String email, String password) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
@@ -61,7 +61,7 @@ Future<User?> logIn(String email, String password) async {
   }
 }
 
-Future logOut(BuildContext context) async {
+Future logout(BuildContext context) async {
   FirebaseAuth _auth = FirebaseAuth.instance;
 
   try {
@@ -80,7 +80,7 @@ Future <String> stockageImage(String nameFile,Uint8List datas) async{
 
 
 }
-updatedUser(String uid,Map<String,dynamic>map) async{
+userUpdate(String uid,Map<String,dynamic>map) async{
 final fire_user = FirebaseFirestore.instance.collection("users");
   fire_user.doc(uid).update(map);
 
@@ -95,14 +95,6 @@ modifyMail(String uid,String mail,Map<String,dynamic>map) async {
   final fire_user = FirebaseFirestore.instance.collection("users");
   fire_user.doc(uid).update(map);
 }
-modifyPassword(String uid,String mail,Map<String,dynamic>map) async {
-  final fire_user = FirebaseFirestore.instance.collection("users");
-  fire_user.doc(uid).update(map);
-}
-deleteUser() async{
-  FirebaseAuth _auth = FirebaseAuth.instance;
-   final user = _auth.currentUser;
-   print(user?.email);
-  user?.delete();
-}
+
+
 

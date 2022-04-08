@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:finishedchatbox/Authenticate/CreateAccount.dart';
+import 'package:finishedchatbox/Authenticate/CreateAccountPage.dart';
 import 'package:finishedchatbox/Screens/HomeScreen.dart';
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("Chatbox"),
@@ -140,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
             isLoading = true;
           });
 
-          logIn(_email.text, _password.text).then((user) {
+          login(_email.text, _password.text).then((user) {
             if (user != null) {
               print("Login Sucessfull");
               setState(() {
@@ -164,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: size.width / 1.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.blue,
+            color: Colors.red,
           ),
           alignment: Alignment.center,
           child: Text(
@@ -185,6 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
       width: size.width / 1.1,
       child: TextField(
         controller: cont,
+
         decoration: InputDecoration(
           prefixIcon: Icon(icon),
           hintText: hintText,

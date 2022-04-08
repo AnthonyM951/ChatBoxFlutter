@@ -5,7 +5,7 @@ import 'package:finishedchatbox/Screens/HomeScreen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:finishedchatbox/Model/Utilisateur.dart';
 import 'Model/Utilisateur.dart';
 import 'package:finishedchatbox/settings.dart';
@@ -50,6 +50,7 @@ class settingsState extends State<settings> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: Text('Settings'),
       ),
       body: bodyPage(),
@@ -90,7 +91,7 @@ class settingsState extends State<settings> {
                         Map<String, dynamic> map = {
                           "AVATAR": urlFile
                         };
-                        updatedUser(myProfil.id, map);
+                        userUpdate(myProfil.id, map);
                         Navigator.pop(context);
                       });
                     },
@@ -108,7 +109,7 @@ class settingsState extends State<settings> {
       );
     }
 
-    getIdentifiant().then((String monId) {
+    getId().then((String monId) {
       getUtilisateur(monId).then((Utilisateur monUser) {
         setState(() {
           myProfil = monUser;

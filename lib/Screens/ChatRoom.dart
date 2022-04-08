@@ -100,6 +100,7 @@ class ChatRoom extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.red,
         title: StreamBuilder<DocumentSnapshot>(
           stream:
           _firestore.collection("users").doc(userMap['uid']).snapshots(),
@@ -172,13 +173,14 @@ class ChatRoom extends StatelessWidget {
                               onPressed: () => getImage(),
                               icon: Icon(Icons.photo),
                             ),
-                            hintText: "Send Message",
+                            hintText: "Send Your Message",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                             )),
                       ),
                     ),
                     IconButton(
+                      color: Colors.red,
                         icon: Icon(Icons.send), onPressed: onSendMessage),
                   ],
                 ),
@@ -202,7 +204,7 @@ class ChatRoom extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.blue,
+          color: Colors.red,
         ),
         child: Text(
           map['message'],

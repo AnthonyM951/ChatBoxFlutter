@@ -1,4 +1,4 @@
-import 'package:finishedchatbox/Authenticate/Methods.dart';
+import 'package:finishedchatbox/Authenticate/functions.dart';
 import 'package:flutter/material.dart';
 
 import '../Screens/HomeScreen.dart';
@@ -21,6 +21,7 @@ class _CreateAccountState extends State<CreateAccount> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.red,
           title: Text("Inscription"),
           centerTitle: true,
         ),
@@ -103,7 +104,7 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size.width / 1.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.blue,
+            color: Colors.red,
           ),
           alignment: Alignment.center,
           child: Text(
