@@ -1,7 +1,5 @@
 # ChatBoxFlutter
 
-Chat app Flutter project
-
 ## Description
 
 This project a chat app, made using flutter and firebase.
