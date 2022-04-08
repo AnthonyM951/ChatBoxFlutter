@@ -1,16 +1,14 @@
-# finishedchatbox
+# ChatBoxFlutter
 
-A new Flutter project.
+## Description
 
-## Getting Started
+This project is a chat app, made using flutter and firebase.
 
-This project is a starting point for a Flutter application.
+To use our app, you'll first need to register, then you can logged in. Once it's done, on the bottom right you can update your parameters like your profile picture or your name.
 
-A few resources to get you started if this is your first Flutter project:
+Then on the main page you will see a search bar. You have to search an email in order to contact the targetted person, and you'll be able to contact him by creating a private chat. (At least create two account in order to make it work)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Unfortunately you can't add the targetted person to your contact list, because we found the solution on how to do hit lately, when we didn't have more time.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+MICHEL ANTHONY
+DUCOUDRE ANTOINE
