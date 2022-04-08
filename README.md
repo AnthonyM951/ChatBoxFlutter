@@ -11,4 +11,8 @@ Then on the main page you will see a search bar. You have to search an email in 
 Unfortunately you can't add the targetted person to your contact list, because we found the solution on how to do hit lately, when we didn't have more time.
 
 MICHEL ANTHONY
+<<<<<<< HEAD
 DUCOUDRE ANTOINE
+=======
+DUCOUDRE ANTOINE
+>>>>>>> 049970d8a6bdb1efcdfde50f77ce31249325b11b
