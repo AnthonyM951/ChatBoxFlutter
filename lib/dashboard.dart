@@ -11,21 +11,27 @@ import 'package:projetfinal/settings.dart';
 import 'contact.dart';
 
 class dashboard extends StatefulWidget{
+  final String user;
+  dashboard({Key? key, required this.user}) : super(key: key);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return dashboardState();
+    return dashboardState(user);
   }
 }
 
 
 
 class dashboardState extends State<dashboard>{
-
+  String user= "";
+  dashboardState(user) {
+    this.user = user;
+  }
   void navigateToContact() async {
     Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return dashboard();
+          print(this.user);
+          return dashboard(user:this.user);
        }
    ));
   }
@@ -65,7 +71,7 @@ class dashboardState extends State<dashboard>{
     Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => contact(user: name),
+          builder: (context) => contact(receiver: name),
         ));
   }
   Widget bodyPage(){
@@ -81,16 +87,16 @@ class dashboardState extends State<dashboard>{
             return ListView.builder(
                 itemCount: documents.length,
                 itemBuilder: (context,index){
-                  Utilisateur user = Utilisateur(documents[index]);
+                  Utilisateur receiver = Utilisateur(documents[index]);
                   return Card(
 
                     elevation: 5.0,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     child:  ListTile(
                       onTap: (){
-                        _sendDataToSecondScreen(context, user.prenom);
+                        _sendDataToSecondScreen(context, receiver.prenom);
                       },
-                      leading: (user.avatar==null)?Container(
+                      leading: (receiver.avatar==null)?Container(
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
@@ -106,12 +112,12 @@ class dashboardState extends State<dashboard>{
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                                image: NetworkImage(user.avatar!),
+                                image: NetworkImage(receiver.avatar!),
                                 fit: BoxFit.fill
                             )
                         ),
                       ),
-                      title: Text("${user.prenom} ${user.nom}"),
+                      title: Text("${receiver.prenom} ${receiver.nom}"),
                       trailing: IconButton(
                         icon: Icon(Icons.edit),
                         onPressed: (){

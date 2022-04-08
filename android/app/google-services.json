@@ -7,9 +7,67 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:4008158952:android:74fab3abd2614b34d34b5d",
+        "android_client_info": {
+          "package_name": "com.example.finishedchatbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4008158952-cgt723rt3gb0pjl74k7gragpvnj1eglt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm1FCyjUJ5YCn1kX4o3F2q0DyV0EEgevk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4008158952-cgt723rt3gb0pjl74k7gragpvnj1eglt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:4008158952:android:a57f4de979526a2ad34b5d",
         "android_client_info": {
           "package_name": "com.example.projetfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4008158952-cgt723rt3gb0pjl74k7gragpvnj1eglt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm1FCyjUJ5YCn1kX4o3F2q0DyV0EEgevk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4008158952-cgt723rt3gb0pjl74k7gragpvnj1eglt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4008158952:android:8beddf2d9ed0728fd34b5d",
+        "android_client_info": {
+          "package_name": "com.example.tutochat"
         }
       },
       "oauth_client": [

@@ -23,11 +23,12 @@ class FirestoreHelper {
 
 
   //méthode
-Future CreateMsg(String urlAvatar,String prenom,String message) async {
+Future CreateMsg(String urlAvatar,String sender,String message,String receiver) async {
   String mid = fire_msg.id;
   Map<String,dynamic>map = {
     "URLAVATAR":urlAvatar,
-    "PRENOM": prenom,
+    "PRENOM": sender,
+    "RECEIVER":receiver,
     "MESSAGE": message
   };
  addMsg(mid, map);
@@ -46,9 +47,11 @@ Future CreateMsg(String urlAvatar,String prenom,String message) async {
   }
 
 //Pour la connexion
-  Future Connexion(String mail, String password) async {
+  Future<Utilisateur> Connexion(String mail, String password) async {
     UserCredential resultat = await auth.signInWithEmailAndPassword(email: mail, password: password);
-  }
+  String uid = resultat.user!.uid;
+  return getUtilisateur(uid);
+}
 
 //Ajouter des utilisateurs
   addUser(String uid,Map<String,dynamic>map){

@@ -6,9 +6,9 @@ class Utilisateur{
   String id="";
   String? avatar;
   String nom="";
-  String prenom="";
+  String uid="";
   String mail="";
-  String? telephone;
+
   bool isConnected = false;
   DateTime birthDay = DateTime.now();
 
@@ -18,11 +18,11 @@ class Utilisateur{
   Utilisateur(DocumentSnapshot snapshot){
     id = snapshot.id;
     Map<String,dynamic> map = snapshot.data() as Map<String,dynamic>;
-    nom = map["NOM"];
-    prenom = map["PRENOM"];
-    mail = map["MAIL"];
-    telephone = map["TELEPHONE"];
+    nom = map["name"];
+
+    mail = map["email"];
     avatar = map["AVATAR"];
+    uid=map["uid"];
 
 
   }

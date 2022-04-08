@@ -7,31 +7,34 @@ import 'package:projetfinal/settings.dart';
 import 'package:projetfinal/functions/FirestoreHelper.dart';
 
 import 'Model/Utilisateur.dart';
+import 'library/lib.dart';
 
 
 class contact extends StatefulWidget {
-  final String user;
-  contact({Key? key, required this.user}) : super(key: key);
+  final String receiver;
+
+  contact({Key? key, required this.receiver}) : super(key: key);
 
 
   @override
   State<StatefulWidget> createState() {
 
     // TODO: implement createState
-    return contactState(user);
+    return contactState(receiver);
   }
 }
 
 class contactState extends State<contact> {
-  String user = "";
-  contactState(user) {
-    this.user = user;
+  String receiver = "";
+  final Utilisateur? profileInfo= myProfil;
+  contactState(receiver) {
+    this.receiver = receiver;
   }
 
   void navigateToDashboard() async {
     Navigator.push(context, MaterialPageRoute(
         builder: (context){
-          return dashboard();
+          return dashboard(user:myProfil!.prenom);
         }
     ));
   }
@@ -72,7 +75,7 @@ class contactState extends State<contact> {
             return Column(children: [
               Container(height: 200,
                 width: 200,
-                  child: Text(user),
+                  child: Text(receiver),
               ),
               TextField(
               decoration: InputDecoration(
@@ -80,7 +83,7 @@ class contactState extends State<contact> {
                 hintText: 'Enter a message',
               suffixIcon: IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: ()async {FirestoreHelper().CreateMsg('fesf', user,  message);},
+                  onPressed: ()async {FirestoreHelper().CreateMsg('fesf',profileInfo!.id, receiver,  message);},
                 ),
           ),
               onChanged:(value)=>setState((){

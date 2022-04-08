@@ -1,9 +1,10 @@
+import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:projetfinal/Model/Utilisateur.dart';
-import 'package:projetfinal/functions/FirestoreHelper.dart';
+import 'package:finishedchatbox/Model/Utilisateur.dart';
+import 'package:finishedchatbox/Authenticate/Methods.dart';
 
 class myDrawer extends StatefulWidget{
   @override
@@ -23,7 +24,16 @@ class myDrawerState extends State<myDrawer>{
 
   @override
   Widget build(BuildContext context) {
+//Construire mon Utilsateur
+    getIdentifiant().then((String monId){
+      getUtilisateur(monId).then((Utilisateur monUser){
+        setState(() {
+          myProfil = monUser;
+          print(myProfil.id);
+        });
 
+      });
+    });
     // TODO: implement build
     //Méthode
     popImage(){
@@ -39,7 +49,7 @@ class myDrawerState extends State<myDrawer>{
                 ElevatedButton(
                     onPressed: (){
                       //Stocker dans la base de donnée
-                      FirestoreHelper().stockageImage(nameFile!, bytesFile!).then((String url){
+                      stockageImage(nameFile!, bytesFile!).then((String url){
                         setState(() {
                           //Récupérer le lien  dans la base donnée
                           urlFile = url;
@@ -48,7 +58,7 @@ class myDrawerState extends State<myDrawer>{
                         Map<String,dynamic> map = {
                           "AVATAR": urlFile
                         };
-                        FirestoreHelper().updatedUser(myProfil.id, map);
+                        updatedUser(myProfil.id, map);
                         Navigator.pop(context);
 
 
@@ -79,15 +89,7 @@ class myDrawerState extends State<myDrawer>{
       );
     }
 
-    //Construire mon Utilsateur
-    FirestoreHelper().getIdentifiant().then((String monId){
-      FirestoreHelper().getUtilisateur(monId).then((Utilisateur monUser){
-        setState(() {
-          myProfil = monUser;
-        });
 
-      });
-    });
 
 
     return Container(
@@ -106,7 +108,6 @@ class myDrawerState extends State<myDrawer>{
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: (myProfil.avatar == null)?NetworkImage("https://voitures.com/wp-content/uploads/2017/06/Kodiaq_079.jpg.jpg"):NetworkImage(myProfil.avatar!)
-
                   )
               ),
             ),
@@ -132,7 +133,7 @@ class myDrawerState extends State<myDrawer>{
           ),
 
           SizedBox(height: 20,),
-          Text("${myProfil.prenom} ${myProfil.nom}")
+          Text("${myProfil.nom}")
         ],
       ),
     );

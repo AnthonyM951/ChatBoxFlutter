@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projetfinal/Model/Utilisateur.dart';
+import 'package:finishedchatbox/Model/Utilisateur.dart';
 
 class detail extends StatefulWidget{
   Utilisateur user;
@@ -18,7 +18,7 @@ class detailState extends State<detail>{
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
-          title: Text("${widget.user.prenom} ${widget.user.nom}"),
+          title: Text("${widget.user.nom}"),
         ),
         body: Center(
           child: bodyPage(),
@@ -41,15 +41,9 @@ class detailState extends State<detail>{
               )
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.phone_android),
-            Text(widget.user.telephone!)
-          ],
-        ),
 
-        Text("${widget.user.prenom} ${widget.user.nom}")
+
+        Text("${widget.user.nom}")
       ],
     );
   }
